@@ -1,0 +1,38 @@
+dbPW QM#8tq3A$ggWR#*N86ye
+
+PROJECT URL: https://xjpeeiadavplegwrsgty.supabase.co
+PUBLISHABLE KEY: sb_publishable_R6opPKvgeeY48vLkjHRaBg_aUG5Slhb
+ANON KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqcGVlaWFkYXZwbGVnd3JzZ3R5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzMTUxMDksImV4cCI6MjA4NDg5MTEwOX0.49RImfEG29jPFHm0axM_h_8mbjCNqVQuSsOFksTatcI
+
+
+src/
+├── components/
+│   ├── Map/
+│   │   ├── MapContainer.jsx
+│   │   ├── MapControls.jsx
+│   │   ├── POIMarkers.jsx
+│   │   └── Directions.jsx
+│   ├── Header/
+│   │   ├── Header.jsx
+│   │   ├── UserMenu.jsx
+│   │   └── SettingsMenu.jsx
+│   ├── Modals/
+│   │   ├── LoginModal.jsx
+│   │   ├── POIRequestModal.jsx
+│   │   └── ProfileModal.jsx
+│   └── Filters/
+│       └── CategoryFilter.jsx
+├── context/
+│   ├── AuthContext.jsx
+│   ├── MapContext.jsx
+│   └── UIContext.jsx
+├── services/
+│   ├── supabase.js
+│   ├── yelpApi.js
+│   └── locationService.js
+├── hooks/
+│   ├── useAuth.js
+│   ├── useMap.js
+│   └── usePOI.js
+└── utils/
+    └── constants.js

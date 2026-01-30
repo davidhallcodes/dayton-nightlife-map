@@ -1,0 +1,69 @@
+import { useEffect, useRef } from 'react'
+import { MapContainer as LeafletMap, TileLayer, useMap } from 'react-leaflet'
+import L from 'leaflet'
+import { useMap as useLeafletMap } from 'react-leaflet'
+import { getPOIs } from '../../api/getPOIs'
+import UserLocationMarker from '../UserLocationMarker/UserLocationMarker'
+import POIMarkers from '../POIMarkers/POIMarkers'
+import MapControls from '../MapControls/MapControls'
+import { createIcon } from '../../utils/icons'
+
+function NightlifeLayer() {
+  const map = useLeafletMap()
+  const markersRef = useRef([])
+
+  useEffect(() => {
+    async function loadPOIs() {
+      const center = map.getCenter()
+      const pois = await getPOIs(center.lat, center.lng)
+
+      // Remove old markers
+      markersRef.current.forEach(marker => map.removeLayer(marker))
+      markersRef.current = []
+
+      const getCategoryIcon = (category = "") => {
+        const c = category.toLowerCase()
+        if (c.includes("bar") || c.includes("pub") || c.includes("tavern")) {
+          return createIcon("fas fa-beer", "#f59e0b")
+        }
+        if (c.includes("club") || c.includes("night")) {
+          return createIcon("fas fa-music", "#ec4899")
+        }
+        return createIcon("fas fa-map-marker-alt", "#3b82f6")
+      }
+
+      pois.forEach(poi => {
+        const marker = L.marker(
+          [poi.lat, poi.lng],
+          { icon: getCategoryIcon(poi.category) }
+        )
+          .addTo(map)
+          .bindPopup(`
+            <b>${poi.name}</b><br/>
+            ⭐ ${poi.rating || "N/A"}<br/>
+            ${poi.address || ""}
+          `)
+
+        markersRef.current.push(marker)
+      })
+    }
+
+    loadPOIs()
+  }, [map])
+
+  return null
+}
+
+export default function MapContainer() {
+  return (
+    <LeafletMap center={[39.7589, -84.1916]} zoom={13} scrollWheelZoom={false}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <UserLocationMarker />
+      <NightlifeLayer />
+      <MapControls />
+    </LeafletMap>
+  )
+}

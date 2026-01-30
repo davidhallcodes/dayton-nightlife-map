@@ -31,18 +31,12 @@ const Header = () => {
       
       {/* Right: Settings & User Icons */}
       <div className="flex items-center space-x-2">
-        <button 
-          onClick={openSettings}
-          className={`p-2 rounded-lg transition-colors ${isSettingsOpen ? 'bg-gray-800' : 'hover:bg-gray-800'}`}
-        >
-          <FaCog size={22} />
-        </button>
         
         <button 
           onClick={toggleUserMenu}
           className={`p-2 rounded-lg transition-colors ${isUserMenuOpen ? 'bg-gray-800' : 'hover:bg-gray-800'}`}
         >
-          <FaUserCircle size={26} />
+          <FaUserCircle size={32} />
         </button>
       </div>
       

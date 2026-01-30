@@ -5,7 +5,7 @@ import { UIProvider } from './context/UIContext'
 import Header from './components/Header/Header'
 import MapContainer from './components/Map/MapContainer'
 import CategoryFilter from './components/Filters/CategoryFilter'
-import Directions from './components/Map/MapDirections'
+import Directions from './components/Map/Directions'
 import LoginModal from './components/Modals/LoginModal'
 import POIRequestModal from './components/Modals/POIRequestModal'
 import ProfileModal from './components/Modals/ProfileModal'
@@ -21,18 +21,36 @@ function AppContent() {
 
   return (
     <div className="h-screen w-screen flex flex-col bg-gray-900">
-      <Header />
-      <main className="flex-1 relative">
-        <MapContainer />
-        <CategoryFilter />
-        <Directions />
-      </main>
-      <Footer />
+      {/* Header - Top Layer (Highest z-index) */}
+      <div className="relative z-50">
+        <Header />
+      </div>
       
-      {/* Modals */}
-      {isLoginModalOpen && <LoginModal />}
-      {isPOIRequestModalOpen && <POIRequestModal />}
-      {isProfileModalOpen && <ProfileModal />}
+      {/* Main Content Area */}
+      <main className="flex-1 relative">
+        {/* Map - Base Layer (Lowest z-index) */}
+        <div className="absolute inset-0 z-0">
+          <MapContainer />
+        </div>
+        
+        {/* UI Components - Middle Layers */}
+        <div className="relative z-10">
+          <CategoryFilter />
+          <Directions />
+        </div>
+      </main>
+      
+      {/* Footer - Top Layer */}
+      <div className="relative z-40">
+        <Footer />
+      </div>
+      
+      {/* Modals - Highest Layer (Above everything) */}
+      <div className="relative z-60">
+        {isLoginModalOpen && <LoginModal />}
+        {isPOIRequestModalOpen && <POIRequestModal />}
+        {isProfileModalOpen && <ProfileModal />}
+      </div>
     </div>
   )
 }

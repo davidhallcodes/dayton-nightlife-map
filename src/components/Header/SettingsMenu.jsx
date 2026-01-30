@@ -44,24 +44,6 @@ const SettingsMenu = () => {
               <div className="text-sm text-gray-400">Show/hide category filter</div>
             </div>
           </button>
-          
-          <div className="pt-3 border-t border-gray-700">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center">
-                <FaCompass className="mr-3 text-yellow-400" />
-                <span className="font-medium text-white">North Orientation</span>
-              </div>
-              <span className="text-gray-400">{northOrientation}°</span>
-            </div>
-            <input
-              type="range"
-              min="0"
-              max="360"
-              value={northOrientation}
-              onChange={(e) => setNorthOrientation(parseInt(e.target.value))}
-              className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
-            />
-          </div>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ export const usePOI = () => {
       const { data, error } = await supabase
         .from('poi')
         .select('*')
-        .eq('is_approved', true)
+        .eq('status', 'approved')
         .order('name')
       
       if (error) throw error
